@@ -8,6 +8,9 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [ focal, jammy ]
     steps:
       -
         name: Set up QEMU
@@ -22,9 +25,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
+        name: Build and push ${{ matrix.version }}
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:ubuntu"
+          context: "{{defaultContext}}:ubuntu-${{ matrix.version }}"
           push: true
-          tags: marcvdm/ubuntu:latest
+          tags: marcvdm/ubuntu:${{ matrix.version }}
