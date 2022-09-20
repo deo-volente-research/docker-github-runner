@@ -1,4 +1,8 @@
+FROM getsentry/sentry-cli:latest as sentry-cli
+
 FROM setupphp/node:focal
+
+COPY --from=sentry-cli /bin/sentry-cli /bin
 
 RUN set -ex \
     && apt-get update && apt-get install -y git openssh-client dpkg-dev zip python3 python3-pip --no-install-recommends \
