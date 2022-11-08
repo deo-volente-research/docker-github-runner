@@ -30,4 +30,4 @@ jobs:
         with:
           context: "{{defaultContext}}:ubuntu-${{ matrix.version }}"
           push: true
-          tags: marcvdm/ubuntu:${{ matrix.version }}
+          tags: deovolenteresearch/ubuntu-deploy:${{ matrix.version }}
