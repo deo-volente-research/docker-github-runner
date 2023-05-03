@@ -13,7 +13,7 @@ RUN apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 #Install Packages
-RUN apt install --no-install-recommends --yes php8.1-cli php8.1-fpm php8.1-common php8.1-bcmath php8.1-curl php8.1-imagick php8.1-mbstring php8.1-pdo-mysql php8.1-zip php8.1-amqp php8.1-gd php8.1-redis php8.1-soap php8.1-xml php8.1-intl php8.1-dom composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb
+RUN apt install --no-install-recommends --yes php8.1-cli php8.1-fpm php8.1-common php8.1-bcmath php8.1-curl php8.1-imagick php8.1-mbstring php8.1-pdo-mysql php8.1-zip php8.1-amqp php8.1-gd php8.1-redis php8.1-soap php8.1-xml php8.1-intl php8.1-dom composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client
 RUN pip3 install awscli
 
 #Install NodeJS
