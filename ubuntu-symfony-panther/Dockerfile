@@ -33,3 +33,6 @@ RUN mkdir -p /var/www/.cache && chmod 777 /var/www/.cache
 
 #Make php8.1 default
 RUN update-alternatives --set php /usr/bin/php8.1
+
+#Disable github dubious owner checks
+RUN git config --global --add safe.directory '*'
