@@ -35,4 +35,4 @@ RUN mkdir -p /var/www/.cache && chmod 777 /var/www/.cache
 RUN update-alternatives --set php /usr/bin/php8.1
 
 #Disable github dubious owner checks
-RUN git config --global --add safe.directory '*'
+RUN git config --system --add safe.directory '*'
