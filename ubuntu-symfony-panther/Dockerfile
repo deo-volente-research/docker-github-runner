@@ -1,7 +1,12 @@
+FROM getsentry/sentry-cli:latest as sentry-cli
+
 FROM ubuntu:jammy
 
 #Setup OS
 RUN apt update -y && apt -y upgrade && apt install lsb-release ca-certificates apt-transport-https software-properties-common wget -y
+
+#Add Sentry CLI
+COPY --from=sentry-cli /bin/sentry-cli /bin
 
 #Install PHP ondrej
 RUN add-apt-repository ppa:ondrej/php -y
