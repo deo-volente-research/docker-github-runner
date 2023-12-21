@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        version: [ jammy , symfony-panther ]
+        version: [ jammy , symfony-panther, ubuntu-php-8.3 ]
     steps:
       -
         name: Set up QEMU
