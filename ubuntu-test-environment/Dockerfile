@@ -11,10 +11,6 @@ COPY --from=sentry-cli /bin/sentry-cli /bin
 #Install PHP ondrej PPA
 RUN add-apt-repository ppa:ondrej/php -y
 
-#Install Elasticsearch PPA
-RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
-
 #Fetch latest packages
 RUN apt update -y
 
@@ -22,7 +18,7 @@ RUN apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 #Install Packages
-RUN apt install --no-install-recommends --yes composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server elasticsearch
+RUN apt install --no-install-recommends --yes composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server
 
 #Install PHP8.3
 RUN apt install --no-install-recommends --yes  php8.3-cli php8.3-fpm php8.3-common php8.3-bcmath php8.3-curl php8.3-imagick php8.3-mbstring php8.3-pdo-mysql php8.3-sqlite3 php8.3-zip php8.3-amqp php8.3-gd php8.3-redis php8.3-soap php8.3-xml php8.3-intl php8.3-dom
