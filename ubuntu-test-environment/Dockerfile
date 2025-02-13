@@ -42,7 +42,7 @@ RUN apt install --no-install-recommends --yes xvfb fonts-noto-color-emoji fonts-
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install --yes ./google-chrome-stable_current_amd64.deb
 
 #Setup PHP
-RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.1/cli/php.ini
+RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.3/cli/php.ini
 
 # Make cache dir for applications available
 RUN mkdir -p /var/www/.cache && chmod 777 /var/www/.cache
