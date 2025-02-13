@@ -8,8 +8,12 @@ RUN apt update -y && apt -y upgrade && apt install lsb-release ca-certificates a
 #Add Sentry CLI
 COPY --from=sentry-cli /bin/sentry-cli /bin
 
-#Install PHP ondrej
+#Install PHP ondrej PPA
 RUN add-apt-repository ppa:ondrej/php -y
+
+#Install Elasticsearch PPA
+RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 
 #Fetch latest packages
 RUN apt update -y
@@ -18,13 +22,13 @@ RUN apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 #Install Packages
-RUN apt install --no-install-recommends --yes composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server
-
-#Install PHP8.1
-RUN apt install --no-install-recommends --yes  php8.1-cli php8.1-fpm php8.1-common php8.1-bcmath php8.1-curl php8.1-imagick php8.1-mbstring php8.1-pdo-mysql php8.1-sqlite3 php8.1-zip php8.1-amqp php8.1-gd php8.1-redis php8.1-soap php8.1-xml php8.1-intl php8.1-dom
+RUN apt install --no-install-recommends --yes composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server elasticsearch
 
 #Install PHP8.3
 RUN apt install --no-install-recommends --yes  php8.3-cli php8.3-fpm php8.3-common php8.3-bcmath php8.3-curl php8.3-imagick php8.3-mbstring php8.3-pdo-mysql php8.3-sqlite3 php8.3-zip php8.3-amqp php8.3-gd php8.3-redis php8.3-soap php8.3-xml php8.3-intl php8.3-dom
+
+#Install php8.4
+RUN apt install --no-install-recommends --yes  php8.4-cli php8.4-fpm php8.4-common php8.4-bcmath php8.4-curl php8.4-imagick php8.4-mbstring php8.4-pdo-mysql php8.4-sqlite3 php8.4-zip php8.4-amqp php8.4-gd php8.4-redis php8.4-soap php8.4-xml php8.4-intl php8.4-dom
 
 #Install AWSCLI
 RUN pip3 install awscli
@@ -47,8 +51,8 @@ RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.1/cli/php.i
 # Make cache dir for applications available
 RUN mkdir -p /var/www/.cache && chmod 777 /var/www/.cache
 
-#Make php8.1 default
-RUN update-alternatives --set php /usr/bin/php8.1
+#Make php8.3 default
+RUN update-alternatives --set php /usr/bin/php8.3
 
 #Disable github dubious owner checks
 RUN git config --system --add safe.directory '*'
