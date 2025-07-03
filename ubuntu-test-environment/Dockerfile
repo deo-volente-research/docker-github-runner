@@ -1,6 +1,6 @@
 FROM getsentry/sentry-cli:latest as sentry-cli
 
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 #Setup OS
 RUN apt update -y && apt -y upgrade && apt install lsb-release ca-certificates apt-transport-https software-properties-common wget -y
