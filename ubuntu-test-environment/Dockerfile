@@ -26,6 +26,9 @@ RUN apt install --no-install-recommends --yes  php8.3-cli php8.3-fpm php8.3-comm
 #Install php8.4
 RUN apt install --no-install-recommends --yes  php8.4-cli php8.4-fpm php8.4-common php8.4-bcmath php8.4-curl php8.4-imagick php8.4-mbstring php8.4-pdo-mysql php8.4-sqlite3 php8.4-zip php8.4-amqp php8.4-gd php8.4-redis php8.4-soap php8.4-xml php8.4-intl php8.4-dom
 
+#Install php8.5
+RUN apt install --no-install-recommends --yes  php8.5-cli php8.5-fpm php8.5-common php8.5-bcmath php8.5-curl php8.5-imagick php8.5-mbstring php8.5-pdo-mysql php8.5-sqlite3 php8.5-zip php8.5-amqp php8.5-gd php8.5-redis php8.5-soap php8.5-xml php8.5-intl php8.5-dom
+
 #Install AWSCLI
 RUN pip3 install awscli
 
@@ -46,6 +49,8 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 
 #Setup PHP
 RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.3/cli/php.ini
+RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.4/cli/php.ini
+RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.5/cli/php.ini
 
 # Make cache dir for applications available
 RUN mkdir -p /var/www/.cache && chmod 777 /var/www/.cache
