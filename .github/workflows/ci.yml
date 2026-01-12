@@ -8,7 +8,6 @@ on:
 
 jobs:
   docker:
-    runs-on: [ self-hosted, fast ]
     steps:
       -
         name: Set up QEMU
