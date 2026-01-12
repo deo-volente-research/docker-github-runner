@@ -8,10 +8,7 @@ on:
 
 jobs:
   docker:
-    runs-on: self-hosted
-    strategy:
-      matrix:
-        version: [jammy, symfony-panther, test-environment ]
+    runs-on: [ self-hosted, fast ]
     steps:
       -
         name: Set up QEMU
@@ -26,9 +23,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push ${{ matrix.version }}
+        name: Build and push test-environment
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:ubuntu-${{ matrix.version }}"
+          context: "{{defaultContext}}:ubuntu-test-environment"
           push: true
-          tags: deovolenteresearch/ubuntu-deploy:${{ matrix.version }}
+          tags: deovolenteresearch/ubuntu-deploy:test-environment
