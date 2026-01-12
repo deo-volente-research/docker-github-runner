@@ -47,6 +47,9 @@ RUN apt install --no-install-recommends --yes xvfb fonts-noto-color-emoji fonts-
 #Install chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install --yes ./google-chrome-stable_current_amd64.deb
 
+#Chrome policy for local network acces, required for testcafe
+RUN mkdir -p /etc/opt/chrome/policies/managed && echo '{ "LocalNetworkAccessAllowedForUrls": ["*"] }' > /etc/opt/chrome/policies/managed/testcafe.json
+
 #Setup PHP
 RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.3/cli/php.ini
 RUN sed -i 's/memory_limit = 128M/memory_limit = 4096M/g' /etc/php/8.4/cli/php.ini
