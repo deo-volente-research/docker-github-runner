@@ -32,6 +32,9 @@ RUN apt install --no-install-recommends --yes  php8.5-cli php8.5-fpm php8.5-comm
 #Install AWSCLI
 RUN pip3 install awscli --break-system-packages
 
+#Update composer
+RUN composer self-update
+
 #Install NodeJS
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs
 
