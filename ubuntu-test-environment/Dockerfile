@@ -18,7 +18,7 @@ RUN apt update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 #Install Packages
-RUN apt install --no-install-recommends --yes composer nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server
+RUN apt install --no-install-recommends --yes nginx sudo curl git python3-pip rename fonts-roboto-unhinted xvfb mysql-client rabbitmq-server openssh-client mysql-server
 
 #Install PHP8.3
 RUN apt install --no-install-recommends --yes  php8.3-cli php8.3-fpm php8.3-common php8.3-bcmath php8.3-curl php8.3-imagick php8.3-mbstring php8.3-pdo-mysql php8.3-sqlite3 php8.3-zip php8.3-amqp php8.3-gd php8.3-redis php8.3-soap php8.3-xml php8.3-intl php8.3-dom
@@ -32,8 +32,8 @@ RUN apt install --no-install-recommends --yes  php8.5-cli php8.5-fpm php8.5-comm
 #Install AWSCLI
 RUN pip3 install awscli --break-system-packages
 
-#Update composer
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer self-update
+#Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #Install NodeJS
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs
